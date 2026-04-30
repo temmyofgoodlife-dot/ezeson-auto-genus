@@ -1,0 +1,735 @@
+    fuel: "Petrol",
+    price: "Contact for price",
+    badge: "Available",
+  },
+  {
+    img: heroImage,
+    name: "Toyota Corolla",
+    year: "2008",
+    mileage: "180,000 km",
+    fuel: "Petrol",
+    price: "Contact for price",
+    badge: "Clean",
+  },
+  {
+    img: galleryInterior,
+    name: "Mercedes-Benz (Premium)",
+    year: "2012",
+    mileage: "95,000 km",
+    fuel: "Petrol",
+    price: "Contact for price",
+    badge: "Featured",
+  },
+];
+
+const Index = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      {/* NAV */}
+      <header className="fixed top-0 left-0 right-0 z-40 border-b border-border/40 bg-background/85 backdrop-blur-md">
+        <nav className="container flex items-center justify-between py-4">
+          <a href="#top" className="flex items-center gap-3" onClick={() => setMenuOpen(false)}>
+            <img src={logo} alt="Ezeson Auto's Genus logo" width={40} height={40} className="h-10 w-10 shadow-glow" />
+            <span className="font-bold tracking-wide text-sm sm:text-base">EZESON AUTO'S GENUS</span>
+          </a>
+          <div className="hidden gap-8 text-sm font-medium md:flex">
+            <a href="#services" className="hover:text-primary transition">Services</a>
+            <a href="#inventory" className="hover:text-primary transition">Cars For Sale</a>
+            <a href="#work" className="hover:text-primary transition">Our Work</a>
+            <a href="#about" className="hover:text-primary transition">About</a>
+            <a href="#contact" className="hover:text-primary transition">Contact</a>
+          </div>
+          <a href={`tel:${PHONE}`} className="hidden md:inline-flex">
+            <Button className="bg-gradient-fire text-primary-foreground hover:opacity-90 rounded-none font-semibold">
+              <Phone className="h-4 w-4" /> Call Now
+            </Button>
+          </a>
+          <button
+            type="button"
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            className="grid h-10 w-10 place-items-center border border-border md:hidden"
+            onClick={() => setMenuOpen((v) => !v)}
+          >
+            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </nav>
+        {menuOpen && (
+          <div className="border-t border-border bg-background/95 backdrop-blur md:hidden">
+            <div className="container flex flex-col py-4 text-sm font-medium">
+              {[
+                ["#services", "Services"],
+                ["#inventory", "Cars For Sale"],
+                ["#work", "Our Work"],
+                ["#about", "About"],
+                ["#contact", "Contact"],
+              ].map(([href, label]) => (
+                <a
+                  key={href}
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className="border-b border-border/40 py-3 hover:text-primary"
+                >
+                  {label}
+                </a>
+              ))}
+              <a href={`tel:${PHONE}`} onClick={() => setMenuOpen(false)} className="mt-4">
+                <Button className="w-full bg-gradient-fire text-primary-foreground rounded-none font-semibold">
+                  <Phone className="h-4 w-4" /> Call 0806 670 8483
+                </Button>
+              </a>
+            </div>
+          </div>
+        )}
+      </header>
+
+      {/* HERO */}
+      <section id="top" className="relative min-h-screen flex items-center overflow-hidden">
+        <img
+          src={heroImage}
+          alt="Red Toyota Corolla serviced at Ezeson Auto's Genus repair shop"
+          width={1920}
+          height={1080}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-dark" />
+        <div className="absolute inset-0 bg-background/50" />
+
+        <div className="container relative z-10 pt-24">
+          <div className="max-w-3xl">
+            <img
+              src={logo}
+              alt="Ezeson Auto's Genus official emblem"
+              width={120}
+              height={120}
+              className="mb-6 h-28 w-28 shadow-glow md:h-32 md:w-32"
+            />
+            <div className="mb-6 inline-flex flex-wrap items-center gap-2 border border-primary/40 bg-background/60 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary backdrop-blur">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-primary" />
+              Repairs • Cars For Sale • Open 24/7
+            </div>
+            <h1 className="text-5xl leading-[0.95] sm:text-7xl md:text-8xl">
+              REPAIR. <span className="text-gradient-fire">DRIVE.</span><br/>
+              OWN.
+            </h1>
+            <p className="mt-6 max-w-xl text-lg text-muted-foreground">
+              Ezeson Auto's Genus is your trusted auto repair shop <span className="font-semibold text-foreground">and car dealership</span> in Nkwelle Ezunaka — honest diagnostics, expert hands, and quality vehicles for sale, round the clock.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <a href={`tel:${PHONE}`}>
+                <Button size="lg" className="bg-gradient-fire text-primary-foreground hover:opacity-90 rounded-none font-bold tracking-wide shadow-glow">
+                  <Phone className="h-5 w-5" /> 0806 670 8483
+                </Button>
+              </a>
+              <a href={WHATSAPP} target="_blank" rel="noreferrer">
+                <Button size="lg" variant="outline" className="rounded-none border-foreground/30 bg-background/40 backdrop-blur font-bold tracking-wide hover:bg-foreground/10">
+                  <MessageCircle className="h-5 w-5" /> WhatsApp Us
+                </Button>
+              </a>
+            </div>
+
+            <div className="mt-16 grid max-w-2xl grid-cols-3 gap-6 border-t border-foreground/15 pt-8">
+              <Stat label="Years Trusted" value="10+" />
+              <Stat label="Cars Serviced" value="2,500+" />
+              <Stat label="Open" value="24/7" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SERVICES */}
+      <section id="services" className="py-24 md:py-32">
+        <div className="container">
+          <div className="mb-16 flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-primary">What we do</p>
+              <h2 className="text-4xl md:text-6xl">Services Built On Trust</h2>
+            </div>
+            <p className="max-w-md text-muted-foreground">From quick fixes to complete overhauls — every job is handled by experienced mechanics with the right tools.</p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((s) => (
+              <div key={s.title} className="group relative bg-card p-8 transition hover:bg-secondary">
+                <s.icon className="h-10 w-10 text-primary transition group-hover:scale-110" />
+                <h3 className="mt-6 text-2xl">{s.title}</h3>
+                <p className="mt-3 text-sm text-muted-foreground">{s.desc}</p>
+                <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-fire transition-all duration-500 group-hover:w-full" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* INVENTORY / CARS FOR SALE */}
+      <section id="inventory" className="bg-secondary py-24 md:py-32">
+        <div className="container">
+          <div className="mb-16 flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-primary">Cars for sale</p>
+              <h2 className="text-4xl md:text-6xl">We Sell Cars Too.</h2>
+            </div>
+            <p className="max-w-md text-muted-foreground">
+              Inspected, serviced and ready to drive. Browse a selection of our quality used vehicles — message us on WhatsApp for current stock and pricing.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {inventory.map((car) => (
+              <div key={car.name} className="group flex flex-col overflow-hidden border border-border bg-card shadow-card-dark transition hover:-translate-y-1 hover:shadow-glow">
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img
+                    src={car.img}
+                    alt={`${car.name} for sale at Ezeson Auto's Genus`}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                  />
+                  <span className="absolute left-3 top-3 bg-gradient-fire px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-primary-foreground">
+                    {car.badge}
+                  </span>
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="text-2xl">{car.name}</h3>
+                  <div className="mt-4 grid grid-cols-3 gap-3 text-xs text-muted-foreground">
+                    <div className="flex items-center gap-1"><CalendarIcon className="h-3.5 w-3.5 text-primary" />{car.year}</div>
+                    <div className="flex items-center gap-1"><GaugeIcon className="h-3.5 w-3.5 text-primary" />{car.mileage}</div>
+                    <div className="flex items-center gap-1"><Fuel className="h-3.5 w-3.5 text-primary" />{car.fuel}</div>
+                  </div>
+                  <div className="mt-6 flex items-center justify-between border-t border-border pt-4">
+                    <div className="flex items-center gap-2 text-sm font-semibold text-primary">
+                      <Tag className="h-4 w-4" /> {car.price}
+                    </div>
+                    <a href={`${WHATSAPP}?text=${encodeURIComponent("Hi, I'm interested in the " + car.name)}`} target="_blank" rel="noreferrer" className="text-xs font-bold uppercase tracking-wider text-primary hover:underline">
+                      Enquire →
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 flex justify-center">
+            <a href={WHATSAPP} target="_blank" rel="noreferrer">
+              <Button size="lg" className="bg-gradient-fire text-primary-foreground hover:opacity-90 rounded-none font-bold tracking-wide shadow-glow">
+                <MessageCircle className="h-5 w-5" /> See All Available Cars
+              </Button>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* OUR WORK / GALLERY */}
+      <section id="work" className="py-24 md:py-32">
+        <div className="container">
+          <div className="mb-12">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-primary">Our work</p>
+            <h2 className="text-4xl md:text-6xl">Real Cars. Real Repairs.</h2>
+          </div>
+          <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
+            {gallery.map((g, i) => (
+              <div
+                key={i}
+                className={`group relative overflow-hidden bg-card ${i === 0 ? "col-span-2 row-span-2" : ""}`}
+              >
+                <img
+                  src={g.src}
+                  alt={g.alt}
+                  loading="lazy"
+                  className="h-full w-full object-cover aspect-square transition duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ABOUT */}
+      <section id="about" className="py-24 md:py-32">
+        <div className="container grid items-center gap-16 md:grid-cols-2">
+          <div>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-primary">About the shop</p>
+            <h2 className="text-4xl md:text-6xl leading-tight">Where Your Car Gets <span className="text-gradient-fire">Reborn.</span></h2>
+            <p className="mt-6 text-muted-foreground">
+              Located in the heart of Nkwelle Ezunaka, Ezeson Auto's Genus has been keeping vehicles on the road across Anambra with reliable, fairly-priced auto repair. We treat every car like our own — and every customer like family.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              {["Honest Pricing", "Genuine Parts", "Skilled Mechanics", "24/7 Availability"].map((t) => (
+                <span key={t} className="border border-primary/40 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-primary">{t}</span>
+              ))}
+            </div>
+          </div>
+          <div className="relative">
+            <div className="absolute -inset-4 bg-gradient-fire opacity-30 blur-2xl" />
+            <div className="relative border border-border bg-card p-8 shadow-card-dark">
+              <div className="flex items-center gap-1 text-accent">
+                {[...Array(5)].map((_, i) => <Star key={i} className="h-5 w-5 fill-current" />)}
+              </div>
+              <p className="mt-6 text-xl italic leading-relaxed">
+                "Brought my car in late at night with a serious electrical fault. They diagnosed and fixed it before sunrise. Real professionals."
+              </p>
+              <p className="mt-6 text-sm font-semibold uppercase tracking-wider text-muted-foreground">— Happy Customer, Anambra</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACT */}
+      <section id="contact" className="bg-secondary py-24 md:py-32">
+        <div className="container">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-primary">Get in touch</p>
+          <h2 className="text-4xl md:text-6xl">Drive In. Call. Or Message.</h2>
+
+          <div className="mt-12 grid gap-px bg-border md:grid-cols-3">
+            <ContactCard icon={MapPin} title="Visit Us" lines={[ADDRESS]} href={MAPS} cta="Get Directions" />
+            <ContactCard icon={Phone} title="Call Us" lines={["0806 670 8483"]} href={`tel:${PHONE}`} cta="Call Now" />
+            <ContactCard icon={Clock} title="Hours" lines={["Open 24 Hours", "Every day of the week"]} />
+          </div>
+
+          <div className="mt-12 flex justify-center">
+            <a href={WHATSAPP} target="_blank" rel="noreferrer">
+              <Button size="lg" className="bg-gradient-fire text-primary-foreground hover:opacity-90 rounded-none font-bold tracking-wide shadow-glow">
+                <MessageCircle className="h-5 w-5" /> Chat on WhatsApp
+              </Button>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href={WHATSAPP}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Chat with Ezeson Auto's Genus on WhatsApp"
+        className="fixed bottom-6 right-6 z-50 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-glow transition hover:scale-110 hover:bg-[#1ebe5d] md:h-16 md:w-16"
+      >
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#25D366] opacity-40" />
+        <MessageCircle className="relative h-7 w-7 md:h-8 md:w-8" fill="currentColor" />
+      </a>
+
+      <footer className="border-t border-border py-8">
+        <div className="container flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
+          <p>© {new Date().getFullYear()} Ezeson Auto's Genus. All rights reserved.</p>
+          <p>Nkwelle Ezunaka, Anambra State</p>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+const Stat = ({ label, value }: { label: string; value: string }) => (
+  <div>
+    <div className="text-3xl md:text-4xl text-gradient-fire">{value}</div>
+    <div className="mt-1 text-xs uppercase tracking-widest text-muted-foreground">{label}</div>
+  </div>
+);
+
+const ContactCard = ({
+  icon: Icon, title, lines, href, cta,
+}: { icon: typeof MapPin; title: string; lines: string[]; href?: string; cta?: string }) => (
+  <div className="bg-card p-8">
+    <Icon className="h-8 w-8 text-primary" />
+    <h3 className="mt-6 text-2xl">{title}</h3>
+    <div className="mt-3 space-y-1 text-muted-foreground">
+      {lines.map((l) => <p key={l}>{l}</p>)}
+    </div>
+    {href && cta && (
+      <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="mt-4 inline-block text-sm font-bold uppercase tracking-wider text-primary hover:underline">
+        {cta} →
+      </a>
+    )import { useState } from "react";
+import { Phone, MapPin, Clock, MessageCircle, Wrench, Battery, Gauge, Cog, Zap, Car, Star, Menu, X, Tag, Fuel, Calendar as CalendarIcon, Gauge as GaugeIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import heroImage from "@/assets/hero-corolla.jpg";
+import logo from "@/assets/logo.png";
+import galleryMercedesFront from "@/assets/car-mercedes-front.jpg";
+import galleryMercedesTrunk from "@/assets/car-mercedes-trunk.jpg";
+import galleryInterior from "@/assets/car-interior.jpg";
+import workEngine1 from "@/assets/work-engine-1.jpg";
+import workEngine2 from "@/assets/work-engine-2.jpg";
+import workElectrical from "@/assets/work-electrical.jpg";
+import workDashboard from "@/assets/work-dashboard.jpg";
+
+const PHONE = "08066708483";
+const WHATSAPP = "https://wa.me/2348066708483";
+const ADDRESS = "33 Omeife, GRA Phase I, Nkwelle Ezunaka 434243, Anambra";
+const MAPS = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Ezeson Auto's Genus, Nkwelle Ezunaka, Anambra")}`;
+
+const services = [
+  { icon: Wrench, title: "General Repairs", desc: "Full mechanical diagnostics and repair on all makes and models." },
+  { icon: Cog, title: "Engine Service", desc: "Tune-ups, overhauls, and engine rebuilds done right the first time." },
+  { icon: Gauge, title: "Brakes & Suspension", desc: "Pads, discs, shocks and steering — keep your ride smooth and safe." },
+  { icon: Battery, title: "Battery & Charging", desc: "Battery testing, replacement and alternator service on the spot." },
+  { icon: Zap, title: "Auto Electrical", desc: "Wiring faults, sensors, lights and ECU diagnostics." },
+  { icon: Car, title: "Recovery & Roadside", desc: "Stuck on the road? We're open 24 hours — call us anytime." },
+];
+
+const gallery = [
+  { src: workEngine2, alt: "Toyota engine bay serviced at Ezeson Auto's Genus" },
+  { src: galleryMercedesFront, alt: "Mercedes-Benz ML serviced and ready for pickup" },
+  { src: workElectrical, alt: "Steering wheel clock spring electrical repair" },
+  { src: galleryInterior, alt: "Mercedes interior detailed after service" },
+  { src: workEngine1, alt: "Engine diagnostics and repair in progress" },
+  { src: galleryMercedesTrunk, alt: "Mercedes-Benz boot inspection" },
+  { src: workDashboard, alt: "Dashboard diagnostics — odometer reading check" },
+];
+
+const inventory = [
+  {
+    img: galleryMercedesFront,
+    name: "Mercedes-Benz ML",
+    year: "2010",
+    mileage: "120,000 km",
+    fuel: "Petrol",
+    price: "Contact for price",
+    badge: "Available",
+  },
+  {
+    img: heroImage,
+    name: "Toyota Corolla",
+    year: "2008",
+    mileage: "180,000 km",
+    fuel: "Petrol",
+    price: "Contact for price",
+    badge: "Clean",
+  },
+  {
+    img: galleryInterior,
+    name: "Mercedes-Benz (Premium)",
+    year: "2012",
+    mileage: "95,000 km",
+    fuel: "Petrol",
+    price: "Contact for price",
+    badge: "Featured",
+  },
+];
+
+const Index = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      {/* NAV */}
+      <header className="fixed top-0 left-0 right-0 z-40 border-b border-border/40 bg-background/85 backdrop-blur-md">
+        <nav className="container flex items-center justify-between py-4">
+          <a href="#top" className="flex items-center gap-3" onClick={() => setMenuOpen(false)}>
+            <img src={logo} alt="Ezeson Auto's Genus logo" width={40} height={40} className="h-10 w-10 shadow-glow" />
+            <span className="font-bold tracking-wide text-sm sm:text-base">EZESON AUTO'S GENUS</span>
+          </a>
+          <div className="hidden gap-8 text-sm font-medium md:flex">
+            <a href="#services" className="hover:text-primary transition">Services</a>
+            <a href="#inventory" className="hover:text-primary transition">Cars For Sale</a>
+            <a href="#work" className="hover:text-primary transition">Our Work</a>
+            <a href="#about" className="hover:text-primary transition">About</a>
+            <a href="#contact" className="hover:text-primary transition">Contact</a>
+          </div>
+          <a href={`tel:${PHONE}`} className="hidden md:inline-flex">
+            <Button className="bg-gradient-fire text-primary-foreground hover:opacity-90 rounded-none font-semibold">
+              <Phone className="h-4 w-4" /> Call Now
+            </Button>
+          </a>
+          <button
+            type="button"
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            className="grid h-10 w-10 place-items-center border border-border md:hidden"
+            onClick={() => setMenuOpen((v) => !v)}
+          >
+            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </nav>
+        {menuOpen && (
+          <div className="border-t border-border bg-background/95 backdrop-blur md:hidden">
+            <div className="container flex flex-col py-4 text-sm font-medium">
+              {[
+                ["#services", "Services"],
+                ["#inventory", "Cars For Sale"],
+                ["#work", "Our Work"],
+                ["#about", "About"],
+                ["#contact", "Contact"],
+              ].map(([href, label]) => (
+                <a
+                  key={href}
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className="border-b border-border/40 py-3 hover:text-primary"
+                >
+                  {label}
+                </a>
+              ))}
+              <a href={`tel:${PHONE}`} onClick={() => setMenuOpen(false)} className="mt-4">
+                <Button className="w-full bg-gradient-fire text-primary-foreground rounded-none font-semibold">
+                  <Phone className="h-4 w-4" /> Call 0806 670 8483
+                </Button>
+              </a>
+            </div>
+          </div>
+        )}
+      </header>
+
+      {/* HERO */}
+      <section id="top" className="relative min-h-screen flex items-center overflow-hidden">
+        <img
+          src={heroImage}
+          alt="Red Toyota Corolla serviced at Ezeson Auto's Genus repair shop"
+          width={1920}
+          height={1080}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-dark" />
+        <div className="absolute inset-0 bg-background/50" />
+
+        <div className="container relative z-10 pt-24">
+          <div className="max-w-3xl">
+            <img
+              src={logo}
+              alt="Ezeson Auto's Genus official emblem"
+              width={120}
+              height={120}
+              className="mb-6 h-28 w-28 shadow-glow md:h-32 md:w-32"
+            />
+            <div className="mb-6 inline-flex flex-wrap items-center gap-2 border border-primary/40 bg-background/60 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary backdrop-blur">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-primary" />
+              Repairs • Cars For Sale • Open 24/7
+            </div>
+            <h1 className="text-5xl leading-[0.95] sm:text-7xl md:text-8xl">
+              REPAIR. <span className="text-gradient-fire">DRIVE.</span><br/>
+              OWN.
+            </h1>
+            <p className="mt-6 max-w-xl text-lg text-muted-foreground">
+              Ezeson Auto's Genus is your trusted auto repair shop <span className="font-semibold text-foreground">and car dealership</span> in Nkwelle Ezunaka — honest diagnostics, expert hands, and quality vehicles for sale, round the clock.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <a href={`tel:${PHONE}`}>
+                <Button size="lg" className="bg-gradient-fire text-primary-foreground hover:opacity-90 rounded-none font-bold tracking-wide shadow-glow">
+                  <Phone className="h-5 w-5" /> 0806 670 8483
+                </Button>
+              </a>
+              <a href={WHATSAPP} target="_blank" rel="noreferrer">
+                <Button size="lg" variant="outline" className="rounded-none border-foreground/30 bg-background/40 backdrop-blur font-bold tracking-wide hover:bg-foreground/10">
+                  <MessageCircle className="h-5 w-5" /> WhatsApp Us
+                </Button>
+              </a>
+            </div>
+
+            <div className="mt-16 grid max-w-2xl grid-cols-3 gap-6 border-t border-foreground/15 pt-8">
+              <Stat label="Years Trusted" value="10+" />
+              <Stat label="Cars Serviced" value="2,500+" />
+              <Stat label="Open" value="24/7" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SERVICES */}
+      <section id="services" className="py-24 md:py-32">
+        <div className="container">
+          <div className="mb-16 flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-primary">What we do</p>
+              <h2 className="text-4xl md:text-6xl">Services Built On Trust</h2>
+            </div>
+            <p className="max-w-md text-muted-foreground">From quick fixes to complete overhauls — every job is handled by experienced mechanics with the right tools.</p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((s) => (
+              <div key={s.title} className="group relative bg-card p-8 transition hover:bg-secondary">
+                <s.icon className="h-10 w-10 text-primary transition group-hover:scale-110" />
+                <h3 className="mt-6 text-2xl">{s.title}</h3>
+                <p className="mt-3 text-sm text-muted-foreground">{s.desc}</p>
+                <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-fire transition-all duration-500 group-hover:w-full" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* INVENTORY / CARS FOR SALE */}
+      <section id="inventory" className="bg-secondary py-24 md:py-32">
+        <div className="container">
+          <div className="mb-16 flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-primary">Cars for sale</p>
+              <h2 className="text-4xl md:text-6xl">We Sell Cars Too.</h2>
+            </div>
+            <p className="max-w-md text-muted-foreground">
+              Inspected, serviced and ready to drive. Browse a selection of our quality used vehicles — message us on WhatsApp for current stock and pricing.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {inventory.map((car) => (
+              <div key={car.name} className="group flex flex-col overflow-hidden border border-border bg-card shadow-card-dark transition hover:-translate-y-1 hover:shadow-glow">
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img
+                    src={car.img}
+                    alt={`${car.name} for sale at Ezeson Auto's Genus`}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                  />
+                  <span className="absolute left-3 top-3 bg-gradient-fire px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-primary-foreground">
+                    {car.badge}
+                  </span>
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="text-2xl">{car.name}</h3>
+                  <div className="mt-4 grid grid-cols-3 gap-3 text-xs text-muted-foreground">
+                    <div className="flex items-center gap-1"><CalendarIcon className="h-3.5 w-3.5 text-primary" />{car.year}</div>
+                    <div className="flex items-center gap-1"><GaugeIcon className="h-3.5 w-3.5 text-primary" />{car.mileage}</div>
+                    <div className="flex items-center gap-1"><Fuel className="h-3.5 w-3.5 text-primary" />{car.fuel}</div>
+                  </div>
+                  <div className="mt-6 flex items-center justify-between border-t border-border pt-4">
+                    <div className="flex items-center gap-2 text-sm font-semibold text-primary">
+                      <Tag className="h-4 w-4" /> {car.price}
+                    </div>
+                    <a href={`${WHATSAPP}?text=${encodeURIComponent("Hi, I'm interested in the " + car.name)}`} target="_blank" rel="noreferrer" className="text-xs font-bold uppercase tracking-wider text-primary hover:underline">
+                      Enquire →
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 flex justify-center">
+            <a href={WHATSAPP} target="_blank" rel="noreferrer">
+              <Button size="lg" className="bg-gradient-fire text-primary-foreground hover:opacity-90 rounded-none font-bold tracking-wide shadow-glow">
+                <MessageCircle className="h-5 w-5" /> See All Available Cars
+              </Button>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* OUR WORK / GALLERY */}
+      <section id="work" className="py-24 md:py-32">
+        <div className="container">
+          <div className="mb-12">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-primary">Our work</p>
+            <h2 className="text-4xl md:text-6xl">Real Cars. Real Repairs.</h2>
+          </div>
+          <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
+            {gallery.map((g, i) => (
+              <div
+                key={i}
+                className={`group relative overflow-hidden bg-card ${i === 0 ? "col-span-2 row-span-2" : ""}`}
+              >
+                <img
+                  src={g.src}
+                  alt={g.alt}
+                  loading="lazy"
+                  className="h-full w-full object-cover aspect-square transition duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ABOUT */}
+      <section id="about" className="py-24 md:py-32">
+        <div className="container grid items-center gap-16 md:grid-cols-2">
+          <div>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-primary">About the shop</p>
+            <h2 className="text-4xl md:text-6xl leading-tight">Where Your Car Gets <span className="text-gradient-fire">Reborn.</span></h2>
+            <p className="mt-6 text-muted-foreground">
+              Located in the heart of Nkwelle Ezunaka, Ezeson Auto's Genus has been keeping vehicles on the road across Anambra with reliable, fairly-priced auto repair. We treat every car like our own — and every customer like family.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              {["Honest Pricing", "Genuine Parts", "Skilled Mechanics", "24/7 Availability"].map((t) => (
+                <span key={t} className="border border-primary/40 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-primary">{t}</span>
+              ))}
+            </div>
+          </div>
+          <div className="relative">
+            <div className="absolute -inset-4 bg-gradient-fire opacity-30 blur-2xl" />
+            <div className="relative border border-border bg-card p-8 shadow-card-dark">
+              <div className="flex items-center gap-1 text-accent">
+                {[...Array(5)].map((_, i) => <Star key={i} className="h-5 w-5 fill-current" />)}
+              </div>
+              <p className="mt-6 text-xl italic leading-relaxed">
+                "Brought my car in late at night with a serious electrical fault. They diagnosed and fixed it before sunrise. Real professionals."
+              </p>
+              <p className="mt-6 text-sm font-semibold uppercase tracking-wider text-muted-foreground">— Happy Customer, Anambra</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACT */}
+      <section id="contact" className="bg-secondary py-24 md:py-32">
+        <div className="container">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-primary">Get in touch</p>
+          <h2 className="text-4xl md:text-6xl">Drive In. Call. Or Message.</h2>
+
+          <div className="mt-12 grid gap-px bg-border md:grid-cols-3">
+            <ContactCard icon={MapPin} title="Visit Us" lines={[ADDRESS]} href={MAPS} cta="Get Directions" />
+            <ContactCard icon={Phone} title="Call Us" lines={["0806 670 8483"]} href={`tel:${PHONE}`} cta="Call Now" />
+            <ContactCard icon={Clock} title="Hours" lines={["Open 24 Hours", "Every day of the week"]} />
+          </div>
+
+          <div className="mt-12 flex justify-center">
+            <a href={WHATSAPP} target="_blank" rel="noreferrer">
+              <Button size="lg" className="bg-gradient-fire text-primary-foreground hover:opacity-90 rounded-none font-bold tracking-wide shadow-glow">
+                <MessageCircle className="h-5 w-5" /> Chat on WhatsApp
+              </Button>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href={WHATSAPP}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Chat with Ezeson Auto's Genus on WhatsApp"
+        className="fixed bottom-6 right-6 z-50 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-glow transition hover:scale-110 hover:bg-[#1ebe5d] md:h-16 md:w-16"
+      >
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#25D366] opacity-40" />
+        <MessageCircle className="relative h-7 w-7 md:h-8 md:w-8" fill="currentColor" />
+      </a>
+
+      <footer className="border-t border-border py-8">
+        <div className="container flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
+          <p>© {new Date().getFullYear()} Ezeson Auto's Genus. All rights reserved.</p>
+          <p>Nkwelle Ezunaka, Anambra State</p>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+const Stat = ({ label, value }: { label: string; value: string }) => (
+  <div>
+    <div className="text-3xl md:text-4xl text-gradient-fire">{value}</div>
+    <div className="mt-1 text-xs uppercase tracking-widest text-muted-foreground">{label}</div>
+  </div>
+);
+
+const ContactCard = ({
+  icon: Icon, title, lines, href, cta,
+}: { icon: typeof MapPin; title: string; lines: string[]; href?: string; cta?: string }) => (
+  <div className="bg-card p-8">
+    <Icon className="h-8 w-8 text-primary" />
+    <h3 className="mt-6 text-2xl">{title}</h3>
+    <div className="mt-3 space-y-1 text-muted-foreground">
+      {lines.map((l) => <p key={l}>{l}</p>)}
+    </div>
+    {href && cta && (
+      <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="mt-4 inline-block text-sm font-bold uppercase tracking-wider text-primary hover:underline">
+        {cta} →
+      </a>
+    )}
+  </div>
+);
+
+export
+  </div>
+);
+
+export default Index;
+
